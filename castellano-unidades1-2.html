@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Lengua Castellana 3º · Unidades 1 y 2</title>
+<meta name="description" content="Repaso interactivo de Lengua Castellana de 3º de Primaria: sonido K, sonido G suave, sinónimos, antónimos, comprensión lectora y el poema.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<style>
+:root{
+  --bg:#fff7ef; --bg2:#ffefd9; --ink:#2b2d42; --muted:#6b6f80; --card:#fff; --line:#eadfcb;
+  --good:#22a861; --goodbg:#dbf7e8; --bad:#e63950; --badbg:#ffe0e5; --gold:#ffc23d;
+  --shadow:0 6px 0 rgba(43,45,66,.12); --mc:#e63950;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{font-family:'Fredoka',ui-rounded,'Arial Rounded MT Bold',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden;
+  background-image:radial-gradient(circle at 12% 8%,#ffd9de 0 120px,transparent 121px),radial-gradient(circle at 92% 28%,#dbe8ff 0 160px,transparent 161px),
+  radial-gradient(circle at 8% 88%,#fff0b8 0 140px,transparent 141px);background-attachment:fixed}
+button,input,textarea{font-family:inherit;color:inherit}
+.bubbles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bubbles span{position:absolute;bottom:-80px;opacity:.3;animation:rise linear infinite;font-size:34px}
+@keyframes rise{to{transform:translateY(-120vh) rotate(40deg)}}
+.app{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:16px 16px 120px}
+.screen{display:none}
+.screen.active{display:block;animation:screenIn .5s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes screenIn{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
+
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.spacer{flex:1}
+.pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:600;box-shadow:var(--shadow)}
+.iconbtn{cursor:pointer;background:#fff;border:3px solid var(--ink);border-radius:16px;min-width:48px;height:48px;font-size:22px;display:grid;place-items:center;box-shadow:var(--shadow);text-decoration:none;color:var(--ink);padding:0 10px}
+.iconbtn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(43,45,66,.12)}
+.badge{display:inline-block;background:var(--bad);color:#fff;border-radius:12px;padding:4px 12px;font-weight:600;font-size:15px}
+
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin:22px 0 10px}
+.hero h1{font-size:clamp(30px,6vw,52px);line-height:1.03;margin:6px 0 8px;font-weight:700}
+.hero h1 .hl{color:#e63950;display:inline-block;animation:wiggle 3s ease-in-out infinite}
+@keyframes wiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.speech{position:relative;background:#fff;border:3px solid var(--ink);border-radius:20px;padding:12px 16px;font-size:18px;font-weight:500;box-shadow:var(--shadow);max-width:560px}
+.mascot{width:130px;height:130px;animation:bob 2.6s ease-in-out infinite;transform-origin:50% 100%}
+.mascot.jump{animation:jump .6s ease}
+.mascot.sad{animation:sad .7s ease}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes jump{30%{transform:translateY(-26px) scale(1.06,.95)}60%{transform:scale(1.1,.9)}}
+@keyframes sad{25%{transform:rotate(-10deg)}75%{transform:rotate(10deg)}}
+.mascot .eye{animation:blink 4s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+
+/* mapa */
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 14px;margin-top:26px}
+.mission-btn{cursor:pointer;background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:popIn .55s cubic-bezier(.2,.9,.3,1.4) forwards}
+.mission-btn:nth-child(even){margin-top:46px}
+@keyframes popIn{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:none}}
+.disc{position:relative;width:min(120px,22vw);aspect-ratio:1;border-radius:32%;background:var(--col);border:4px solid var(--ink);display:grid;place-items:center;
+  font-size:clamp(34px,7vw,54px);box-shadow:0 8px 0 var(--ink);animation:float 3.5s ease-in-out infinite;animation-delay:var(--d);transition:transform .2s}
+.disc:after{content:"";position:absolute;inset:8px;border-radius:28%;border:3px dashed rgba(255,255,255,.55)}
+.mission-btn:hover .disc{transform:scale(1.08) rotate(-5deg)}
+@keyframes float{50%{translate:0 -7px}}
+.num{position:absolute;top:-8px;left:-8px;width:34px;height:34px;border-radius:50%;background:#fff;border:3px solid var(--ink);font-size:17px;font-weight:700;display:grid;place-items:center}
+.done-mark{position:absolute;bottom:-8px;right:-8px;width:36px;height:36px;border-radius:50%;background:var(--gold);border:3px solid var(--ink);font-size:18px;display:grid;place-items:center}
+.name{font-weight:600;font-size:clamp(15px,2.4vw,19px);text-align:center;line-height:1.1;max-width:150px}
+.stars{font-size:20px;letter-spacing:2px;color:#d9cdb7}
+.stars .on{color:var(--gold);text-shadow:0 2px 0 #c98a00}
+.teacher-btn{cursor:pointer;margin:42px auto 0;display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#c9b6ff,#8f5cf7);color:#fff;
+  border:4px solid var(--ink);border-radius:28px;padding:16px 26px;box-shadow:0 8px 0 var(--ink);font-size:clamp(20px,4vw,26px);font-weight:700;text-shadow:0 2px 0 rgba(0,0,0,.2)}
+.teacher-btn .ic{font-size:44px}
+.teacher-btn small{display:block;font-size:15px;font-weight:500}
+.teacher-btn:active{transform:translateY(6px);box-shadow:0 2px 0 var(--ink)}
+.foot{margin-top:40px;text-align:center;color:var(--muted);font-size:14px}
+.linkbtn{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:14px}
+
+/* sección */
+.mbar{display:flex;align-items:center;gap:12px}
+.mtitle{display:flex;align-items:center;gap:10px;font-size:clamp(21px,4.5vw,32px);font-weight:700;flex:1;min-width:0}
+.mtitle .em{width:54px;height:54px;flex:none;border-radius:30%;background:var(--mc);border:3px solid var(--ink);display:grid;place-items:center;font-size:28px}
+.tabs{display:flex;gap:8px;margin:18px 0 14px;flex-wrap:wrap}
+.tab{cursor:pointer;min-width:46px;height:42px;padding:0 12px;border-radius:14px;border:3px solid var(--ink);background:#fff;font-weight:700;font-size:17px;box-shadow:0 4px 0 var(--ink);position:relative}
+.tab.cur{background:var(--mc);color:#fff;transform:translateY(-3px)}
+.tab .mk{position:absolute;top:-10px;right:-10px;font-size:15px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ink);background:#fff}
+.stage{background:#fff;border:4px solid var(--ink);border-radius:28px;box-shadow:0 10px 0 var(--ink);padding:22px}
+.enter{animation:stepIn .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes stepIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+.act-h{display:flex;align-items:center;gap:10px;margin:0 0 6px;font-size:clamp(20px,3.8vw,27px);flex-wrap:wrap}
+.tag{font-size:14px;background:var(--mc);color:#fff;border-radius:10px;padding:3px 10px;font-weight:600;white-space:nowrap}
+.tag.open{background:#8f5cf7}
+.help{color:var(--muted);font-size:17px;margin:0 0 16px}
+
+/* recuerda */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.rcard{border:3px solid var(--ink);border-radius:20px;padding:14px;background:var(--bg2);box-shadow:var(--shadow);opacity:0;animation:popIn .5s cubic-bezier(.2,.9,.3,1.4) forwards;font-size:18px;line-height:1.35}
+.rcard .e{font-size:40px;line-height:1}
+.rcard h3{margin:6px 0;font-size:21px;color:var(--mc)}
+.rcard .ex{font-style:italic;color:var(--muted)}
+.rcard b{color:var(--mc)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{cursor:pointer;border:4px solid var(--ink);border-radius:18px;padding:11px 20px;font-size:19px;font-weight:700;background:var(--mc);color:#fff;
+  box-shadow:0 6px 0 var(--ink);text-shadow:0 2px 0 rgba(0,0,0,.18);transition:transform .15s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--ink)}
+.btn.alt{background:#fff;color:var(--ink);text-shadow:none}
+.btn.check{background:var(--good)}
+.btn.again{background:#ff9f1c}
+.btn[disabled]{opacity:.4;pointer-events:none}
+
+/* lectura */
+.reading{background:#fffbea;border:3px solid #f1d27a;border-radius:20px;padding:16px 18px;margin-bottom:18px;font-size:clamp(17px,2.8vw,20px);line-height:1.55}
+.reading h3{margin:0 0 8px;color:#b5651d;font-size:24px}
+.reading p{margin:0 0 10px;text-indent:1.2em}
+.reading details summary{cursor:pointer;font-weight:700;color:#b5651d}
+.voc{font-size:15px;color:var(--muted);border-top:2px dashed #f1d27a;margin-top:8px;padding-top:8px}
+
+/* fichas */
+.pool{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:14px;border:3px dashed var(--line);border-radius:20px;background:#fffdf8;min-height:70px;margin-bottom:18px;transition:box-shadow .2s}
+.pool.hover{box-shadow:0 0 0 5px var(--gold)}
+.pool:empty:before{content:"Todas las fichas están colocadas. ¡Pulsa Corregir!";color:var(--muted);font-size:15px;align-self:center}
+.chip{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;background:#fff;border:3px solid var(--ink);border-radius:15px;padding:8px 14px;
+  font-size:18px;font-weight:500;box-shadow:0 5px 0 var(--ink);transition:transform .15s,opacity .2s;line-height:1.15;text-align:center}
+.chip:hover{transform:translateY(-3px) rotate(-1deg)}
+.chip.sel{background:#fff3c4;transform:translateY(-4px) scale(1.06);box-shadow:0 0 0 4px var(--gold),0 7px 0 var(--ink)}
+.chip.src{opacity:.25}
+.zone .chip{box-shadow:0 3px 0 var(--ink);animation:pop .35s cubic-bezier(.2,.9,.3,1.6)}
+.chip.locked{cursor:default}
+.chip.locked:hover{transform:none}
+.chip.ok{background:var(--goodbg);border-color:var(--good);color:#11663a}
+.chip.ok:after{content:" ✔"}
+.chip.ko{background:var(--badbg);border-color:var(--bad);color:#a3142a;animation:shake .45s}
+.chip.ko:after{content:" ✘"}
+.ghost{position:fixed;left:0;top:0;z-index:1000;pointer-events:none;box-shadow:0 14px 24px rgba(0,0,0,.2),0 5px 0 var(--ink)}
+.ghost.back{transition:transform .3s cubic-bezier(.4,1.6,.6,1)}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+.shake{animation:shake .45s}
+@keyframes shake{20%{translate:-8px}40%{translate:8px}60%{translate:-5px}80%{translate:5px}}
+.zone{transition:transform .2s,box-shadow .2s}
+.zone.hover{transform:scale(1.03);box-shadow:0 0 0 5px var(--gold)}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.bucket{border:3px solid var(--ink);border-radius:20px;background:var(--bc,#f3f3f3);min-height:150px;padding:10px;display:flex;flex-direction:column;cursor:pointer}
+.bucket .bh{text-align:center;font-weight:700;font-size:20px;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:6px 10px;margin-bottom:10px}
+.zone-items{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:flex-start;flex:1}
+.zone-items .chip{font-size:16px;padding:6px 10px}
+
+/* huecos */
+.lines{font-size:clamp(19px,3.2vw,23px);line-height:2.3}
+.lines p{margin:0 0 6px}
+.lines.list p{border-bottom:2px dashed var(--line);padding:2px 0}
+.gap{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;min-width:var(--w,110px);min-height:46px;border-bottom:4px solid var(--mc);
+  background:#f6f1e6;border-radius:12px 12px 4px 4px;margin:0 4px;padding:2px 4px;cursor:pointer}
+.gap .chip{font-size:18px;padding:3px 10px;border-width:2px}
+.gap.ko{background:var(--badbg);border-bottom-color:var(--bad)}
+.tin{font-size:inherit;font-weight:600;border:0;border-bottom:4px solid var(--mc);background:#f6f1e6;border-radius:10px 10px 3px 3px;padding:2px 8px;
+  width:var(--w,120px);text-align:center;margin:0 3px;outline:none;color:#1d4ed8}
+.tin:focus{box-shadow:0 0 0 3px var(--gold)}
+.tin.ok{background:var(--goodbg);border-bottom-color:var(--good);color:#11663a}
+.tin.ko{background:var(--badbg);border-bottom-color:var(--bad);color:#a3142a;animation:shake .45s}
+.tin::placeholder{color:#b9ad97;font-weight:500}
+
+/* parejas */
+.pairs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.pair{display:flex;align-items:center;gap:8px;border:3px solid var(--ink);border-radius:18px;padding:8px 10px;background:var(--bg2)}
+.pair .w{font-weight:700;font-size:19px;min-width:90px}
+.pair .arrow{font-size:20px}
+.slot{flex:1;min-height:50px;border:3px dashed var(--ink);border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:4px}
+.slot .chip{font-size:17px;padding:5px 10px}
+.slot.ko{border-color:var(--bad);background:var(--badbg)}
+/* ordenar */
+.olist{display:grid;gap:10px}
+.orow{display:flex;align-items:center;gap:10px}
+.orow .n{width:38px;height:38px;flex:none;border-radius:50%;background:var(--mc);color:#fff;border:3px solid var(--ink);font-weight:700;display:grid;place-items:center}
+
+/* elegir */
+.q{border:3px solid var(--ink);border-radius:18px;padding:12px 14px;margin-bottom:12px;background:#fffdf8}
+.q p{margin:0 0 10px;font-weight:600;font-size:19px}
+.opts{display:grid;gap:8px}
+.opt{cursor:pointer;text-align:left;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:9px 12px;font-size:17px;font-weight:500;box-shadow:0 4px 0 var(--ink);display:flex;gap:10px;align-items:center}
+.opt .l{width:30px;height:30px;flex:none;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;background:var(--bg2);font-size:15px}
+.opt.sel{background:#fff3c4;transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
+.opt.sel .l{background:var(--gold)}
+.opt.ok{background:var(--goodbg);border-color:var(--good)}
+.opt.ok .l{background:var(--good);color:#fff}
+.opt.ko{background:var(--badbg);border-color:var(--bad);animation:shake .45s}
+.opt.ko .l{background:var(--bad);color:#fff}
+.q.miss{border-color:var(--bad)}
+.opt[disabled]{cursor:default}
+
+/* poema */
+.poem{background:linear-gradient(#fff,#fff8ee);border:3px solid var(--ink);border-radius:22px;padding:18px 24px;margin:0 auto 18px;max-width:520px;box-shadow:var(--shadow);
+  font-size:clamp(19px,3.4vw,23px);line-height:1.6;position:relative}
+.poem h3{margin:0 0 10px;text-align:center;color:var(--mc);font-size:26px}
+.poem .st{margin-bottom:18px}
+.poem .st:last-child{margin-bottom:0}
+.poem:after{content:"✒️";position:absolute;right:14px;bottom:8px;font-size:28px;opacity:.6}
+.pq{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;margin:10px 0;flex-wrap:wrap}
+.pq .tin{--w:70px}
+h4.sub{font-size:20px;margin:18px 0 10px}
+
+/* abiertas */
+.open-q{margin-bottom:14px}
+.open-q label{display:block;font-weight:600;font-size:19px;margin-bottom:6px}
+.open-q textarea,.open-q input{width:100%;font-size:19px;border:3px solid var(--ink);border-radius:14px;padding:10px 12px;background:#fdfbff;outline:none;resize:vertical}
+.open-q textarea:focus,.open-q input:focus{box-shadow:0 0 0 4px #c9b6ff}
+.saved{color:#6b4bd1;font-weight:600;font-size:15px;opacity:0;transition:opacity .3s}
+.saved.show{opacity:1}
+.note{background:#f1ebff;border:3px dashed #8f5cf7;border-radius:16px;padding:10px 14px;font-size:16px;margin-bottom:16px}
+
+/* barra de corrección */
+.checkbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;margin-top:20px;padding:14px 16px;border-radius:20px;border:3px solid var(--line);background:#fffdf8}
+.checkbar .msg{font-size:20px;font-weight:700}
+.checkbar.good{background:var(--goodbg);border-color:var(--good);animation:popIn .45s forwards}
+.checkbar.mid{background:#fff4d6;border-color:#f0b400;animation:popIn .45s forwards}
+.score{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:44px;border-radius:14px;background:#fff;border:3px solid var(--ink);font-size:21px;font-weight:700;margin-right:6px;padding:0 8px}
+
+/* respuestas */
+.rep-name{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:20px;font-weight:600;margin-bottom:16px}
+.rep-name input{flex:1;min-width:200px;font-size:20px;border:3px solid var(--ink);border-radius:14px;padding:8px 12px}
+.rep-sec{border:3px solid var(--ink);border-radius:18px;padding:12px 16px;margin-bottom:14px}
+.rep-sec h3{margin:0 0 8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.rep-item{margin:6px 0 10px}
+.rep-item .qq{font-weight:600}
+.rep-item .aa{background:#f6f1ff;border-radius:10px;padding:6px 10px;white-space:pre-wrap;min-height:34px}
+.rep-item .aa.empty{color:#b04a5a;font-style:italic;background:#fff0f2}
+.rep-scores{font-size:16px;color:var(--muted)}
+
+/* mascota acompañante */
+.buddy{position:fixed;right:12px;bottom:10px;z-index:50;display:none;align-items:flex-end;gap:6px;pointer-events:none}
+.buddy .mascot{width:82px;height:82px}
+.buddy .say{background:#fff;border:3px solid var(--ink);border-radius:18px 18px 4px 18px;padding:8px 12px;font-weight:600;font-size:17px;box-shadow:var(--shadow);max-width:230px;opacity:0;transform:scale(.6) translateY(10px);transform-origin:right bottom;transition:all .3s cubic-bezier(.2,.9,.3,1.5)}
+.buddy .say.show{opacity:1;transform:none}
+canvas#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1200}
+
+@media (max-width:640px){
+  .missions{grid-template-columns:repeat(2,1fr);gap:24px 10px}
+  .disc{width:min(118px,34vw)}
+  .hero{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .hero .mascot{width:110px;height:110px}
+  .stage{padding:14px;border-radius:22px}
+  .chip{font-size:15px;padding:7px 10px;border-radius:13px;box-shadow:0 4px 0 var(--ink)}
+  .pool{gap:8px;padding:10px}
+  .buckets{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .bucket{min-height:110px;padding:8px}
+  .bucket .bh{font-size:16px;padding:5px}
+  .zone-items .chip{font-size:14px;padding:4px 8px}
+  .pairs{grid-template-columns:1fr}
+  .lines{line-height:2.1}
+  .buddy .mascot{width:62px;height:62px}
+  .buddy .say{font-size:15px}
+  .mtitle .em{width:44px;height:44px;font-size:24px}
+  .tab{min-width:40px;height:38px;font-size:15px;padding:0 9px}
+}
+@media print{
+  body{background:#fff}
+  .bubbles,.buddy,canvas,.screen:not(#screen-report),.noprint{display:none!important}
+  #screen-report{display:block!important;animation:none}
+  .stage{box-shadow:none;border:2px solid #000}
+  .rep-sec{break-inside:avoid}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bubbles" id="bubbles"></div>
+<div class="app">
+
+  <!-- ============ MAPA ============ -->
+  <section class="screen active" id="screen-map">
+    <div class="top">
+      <a class="iconbtn" href="index.html" title="Volver al índice">🏠</a>
+      <span class="badge">Lengua Castellana · 3º</span>
+      <span class="spacer"></span>
+      <span class="pill">⭐ <span id="totalStars">0</span> / <span id="maxStars">18</span></span>
+      <button class="iconbtn sndbtn" aria-label="Sonido">🔊</button>
+    </div>
+    <div class="hero">
+      <div id="heroMascot"></div>
+      <div>
+        <span class="badge" style="background:#3a86ff">Unidades 1 y 2</span>
+        <h1>¡Repasamos para el <span class="hl">examen</span>!</h1>
+        <div class="speech" id="heroSpeech">¡Hola! Soy <b>Leo</b> 📖. Elige un tema, haz los ejercicios y pulsa <b>Corregir</b> al final. Si fallas algo, ¡repítelo para mejorar!</div>
+      </div>
+    </div>
+    <div class="missions" id="missions"></div>
+    <button class="teacher-btn" id="reportBtn"><span class="ic">📝</span><span>Mis respuestas para la profe<small>Lo que has escrito, listo para imprimir</small></span></button>
+    <div class="foot">Lengua Castellana 3º · Unidades 1 y 2 · <button class="linkbtn" id="resetBtn">Borrar mi progreso</button></div>
+  </section>
+
+  <!-- ============ SECCIÓN ============ -->
+  <section class="screen" id="screen-sec">
+    <div class="mbar">
+      <button class="iconbtn" id="backBtn" aria-label="Volver">⬅</button>
+      <div class="mtitle"><span class="em" id="sEmoji"></span><span id="sTitle"></span></div>
+      <button class="iconbtn sndbtn" aria-label="Sonido">🔊</button>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="stage" id="stage"></div>
+  </section>
+
+  <!-- ============ RESPUESTAS ============ -->
+  <section class="screen" id="screen-report">
+    <div class="mbar noprint">
+      <button class="iconbtn" id="backBtn2" aria-label="Volver">⬅</button>
+      <div class="mtitle"><span class="em" style="background:#8f5cf7">📝</span><span>Mis respuestas</span></div>
+    </div>
+    <div class="stage" style="margin-top:18px" id="report"></div>
+  </section>
+
+  <div class="buddy" id="buddy"><div class="say" id="buddySay"></div><div id="buddyMascot"></div></div>
+</div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* ==============================================================
+   CONTENIDO — se puede editar fácilmente.
+   Tipos de ejercicio:
+   sort (clasificar arrastrando) · match (parejas arrastrando)
+   dragblanks (huecos arrastrando)  · type (huecos escribiendo {respuesta})
+   order (ordenar) · choice (elegir) · poem (analizar poema)
+   open (respuesta libre que corrige la maestra)
+   ============================================================== */
+const READ_GORRO = `<h3>Un gorro colorado</h3>
+<p>El gnomo Fortunato encontró un día un gorro precioso: puntiagudo, colorado y muy elegante. Se lo probó y le quedaba perfecto.</p>
+<p>Como tenía miedo de que se le manchara, se puso su gorro viejo encima y siguió su camino, silbando y saltando, con una alegría secreta dentro del cuerpo.</p>
+<p>Entonces se encontró con su amigo Jacinto, que estaba muy triste. —¡He extraviado mi gorro! Era un regalo y lo acababa de estrenar —dijo llorando.</p>
+<p>Fortunato comprendió que el gorro que llevaba escondido era el de su amigo. Se lo quitó de la cabeza y se lo devolvió. Jacinto saltaba y reía de alegría, y Fortunato no podía parar de sonreír al ver a su amigo tan feliz.</p>
+<div class="voc"><b>extraviado:</b> perdido · <b>de primera:</b> muy bueno, excelente</div>`;
+const READ_KAVITA = `<h3>Todo es valioso</h3>
+<p>Hace mucho tiempo, en una pequeña aldea de la India, vivía Kavita. Cada mañana, al alba, caminaba hasta un arroyo lejano y llenaba de agua dos viejos cántaros de barro.</p>
+<p>Un día descubrió que uno de los cántaros tenía una grieta y perdía agua por el camino. Al llegar a casa solo le quedaba la mitad. Pero Kavita no hizo nada para arreglarlo.</p>
+<p>Su vecino Ravi le dijo: —¿No ves que pierdes tu tiempo? Tira esa vasija inútil y cámbiala por otra.</p>
+<p>Kavita lo llevó al camino y le enseñó unas flores preciosas que habían nacido esa primavera. —Han crecido gracias al agua que se derrama del cántaro roto. Corto algunas y las reparto por la aldea.</p>
+<p>Ravi se quedó sin palabras y aprendió una lección: lo que parece defectuoso puede tener un enorme valor.</p>
+<div class="voc"><b>alba:</b> amanecer · <b>cántaro:</b> vasija de barro · <b>apacible:</b> agradable, tranquilo</div>`;
+const READ_HUERTO = `<h3>El huerto del colegio</h3>
+<p>En el colegio de Marta hay un pequeño huerto. Cada jueves, los alumnos de tercero bajan con su maestro, Enrique, para cuidar las plantas.</p>
+<p>Marta riega las lechugas con una regadera verde y su amigo Miguel quita las hojas secas de las tomateras.</p>
+<p>Un jueves descubrieron un agujero enorme junto a las zanahorias. —¿Quién habrá hecho esto? —preguntó Miguel, muy sorprendido.</p>
+<p>Al día siguiente, muy temprano, vieron salir del agujero un pequeño conejo gris. Los niños no se enfadaron: decidieron hacerle una casita al lado del huerto y plantar zanahorias solo para él.</p>
+<p>Desde entonces, el conejo es la mascota de la clase. Lo llaman Queso, porque tiene una mancha amarilla en la oreja.</p>`;
+
+const SECTIONS = [
+{
+  id:'k', title:'El sonido K', emoji:'🧀', color:'#3a86ff', bg:'#dbe8ff',
+  recuerda:[
+    {e:'🐌', t:'C delante de a, o, u', d:'El sonido K se escribe con <b>c</b> delante de <b>a, o, u</b>.', x:'casa, colegio, cubo, caracol'},
+    {e:'🧀', t:'QU delante de e, i', d:'El sonido K se escribe con <b>qu</b> delante de <b>e, i</b>. ¡La <b>u</b> no suena!', x:'queso, bosque, equipo, mosquito'},
+    {e:'💡', t:'Truco', d:'Mira la vocal que va <b>después</b>: si es <b>e</b> o <b>i</b> → <b>qu</b>. Si es <b>a, o, u</b> → <b>c</b>.', x:'ca · que · qui · co · cu'}
+  ],
+  ex:[
+    {type:'sort', title:'¿C o QU?', help:'Arrastra cada palabra a su grupo. Cuando termines, pulsa <b>Corregir</b>.',
+      buckets:[{id:'c',label:'Con c (ca, co, cu)',bc:'#dbe8ff'},{id:'q',label:'Con qu (que, qui)',bc:'#fff1c9'}],
+      items:[['casa','c'],['cubo','c'],['colegio','c'],['cuento','c'],['escondite','c'],['parque','q'],['queso','q'],['Quique','q'],['quinto','q'],['raqueta','q'],['mosquito','q'],['pequeño','q']]},
+    {type:'type', title:'Escribe c o qu', help:'Escribe en cada hueco <b>c</b> o <b>qu</b>.', cls:'list',
+      lines:['🐌 {c}aracol','🪁 {c}ometa','🧀 {qu}eso','🎾 ra{qu}eta','⛷️ es{qu}íes','🍬 {c}aramelos','🧈 mante{qu}illa','🌲 bos{qu}e','🦟 mos{qu}ito','🏫 {c}olegio']},
+    {type:'dragblanks', title:'Completa las oraciones', help:'Arrastra la palabra bien escrita a cada hueco. ¡Cuidado: hay palabras mal escritas!',
+      text:['Vimos un [caracol] en el camino.','Esta [cometa] es de Carla.','Lucas come galletas de [mantequilla].','Me encanta la tarta de [queso].','Maca vive en el [quinto] piso.'],
+      extra:['carakol','qeso','cinto','qometa']},
+    {type:'open', title:'Ahora piensa tú', help:'Escribe tus respuestas. Tu maestra las corregirá.',
+      prompts:[{q:'Escribe tres palabras con c (ca, co, cu).', ph:'Ejemplo: ...'},{q:'Escribe tres palabras con qu (que, qui).'},{q:'Inventa una oración con una palabra que lleve qu.', lines:2}]}
+  ]
+},
+{
+  id:'g', title:'El sonido G suave', emoji:'🐧', color:'#06b6a4', bg:'#d4f5f1',
+  recuerda:[
+    {e:'💧', t:'G delante de a, o, u', d:'Se escribe <b>g</b> delante de <b>a, o, u</b>.', x:'amiga, gota, gustar, agua'},
+    {e:'🧸', t:'GU delante de e, i', d:'Se escribe <b>gu</b> delante de <b>e, i</b> cuando la <b>u no suena</b>.', x:'juguete, guitarra, manguitos'},
+    {e:'🐧', t:'GÜ delante de e, i', d:'Se escribe <b>gü</b> (con diéresis) delante de <b>e, i</b> cuando la <b>u sí suena</b>.', x:'pingüino, vergüenza, cigüeña, agüita'}
+  ],
+  ex:[
+    {type:'sort', title:'Clasifica en tres grupos', help:'Arrastra cada palabra a su grupo y pulsa <b>Corregir</b>.',
+      buckets:[{id:'g',label:'ga, go, gu',bc:'#d4f5f1'},{id:'gu',label:'gue, gui',bc:'#fff1c9'},{id:'gü',label:'güe, güi',bc:'#ece2ff'}],
+      items:[['bigote','g'],['agua','g'],['águila','g'],['regadera','g'],['gusano','g'],['guepardo','gu'],['higuera','gu'],['guiño','gu'],['juguete','gu'],['aguijón','gu'],['pingüino','gü'],['cigüeña','gü'],['bilingüe','gü'],['piragüista','gü']]},
+    {type:'type', title:'Escribe g, gu o gü', help:'Escribe en cada hueco <b>g</b>, <b>gu</b> o <b>gü</b>. ¡No olvides la diéresis (ü) cuando la u suena!', cls:'list',
+      lines:['🔥 ho{gu}era','🍽️ se{gu}idor','🚣 pira{gü}ismo','🐦 jil{gu}ero','🕳️ a{g}ujero','🐧 pin{gü}ino','🎸 {gu}itarra','👧 ami{g}a','😳 ver{gü}enza','☂️ para{g}uas']},
+    {type:'dragblanks', title:'Completa las oraciones', help:'Arrastra la palabra bien escrita a cada hueco.',
+      text:['Águeda toca la [guitarra].','Hugo abre su [juguete] nuevo.','Olga come [galletas] de chocolate.','La [cigüeña] hace su nido en el campanario.','Me da [vergüenza] cantar delante de todos.'],
+      extra:['gitarra','jugete','cigueña','verguenza']},
+    {type:'open', title:'Ahora piensa tú', help:'Escribe tus respuestas. Tu maestra las corregirá.',
+      prompts:[{q:'Escribe dos palabras con ga, go o gu.'},{q:'Escribe dos palabras con gue o gui.'},{q:'Escribe dos palabras con güe o güi.'},{q:'Inventa una oración con una palabra que lleve gü.', lines:2}]}
+  ]
+},
+{
+  id:'sin', title:'Sinónimos', emoji:'👯', color:'#2fbf71', bg:'#d9f6e6',
+  recuerda:[
+    {e:'👯', t:'Palabras sinónimas', d:'Son las que tienen <b>significados parecidos</b>.', x:'extraviar y perder'},
+    {e:'🔁', t:'Para qué sirven', d:'Podemos <b>cambiar</b> una palabra por su sinónima y la oración significa casi lo mismo.', x:'El gorro es colorado → El gorro es rojo'},
+    {e:'🧩', t:'Más ejemplos', d:'breve – corto · veloz – rápido · raro – extraño · alegre – contento', x:''}
+  ],
+  ex:[
+    {type:'match', title:'Forma parejas de sinónimos', help:'Arrastra a cada palabra su sinónimo y pulsa <b>Corregir</b>.',
+      pairs:[['breve','corto'],['veloz','rápido'],['raro','extraño'],['colorado','rojo'],['olfatear','oler'],['extraviar','perder'],['alegre','contento'],['arroyo','riachuelo']]},
+    {type:'dragblanks', title:'Cambia por un sinónimo', help:'Arrastra a cada hueco el sinónimo de la palabra destacada.', cls:'list',
+      text:['El perro <b>olfatea</b> las flores. → El perro [huele] las flores.','Tengo bolígrafos <b>diferentes</b>. → Tengo bolígrafos [distintos].','Era un gorro <b>de primera</b>. → Era un gorro [excelente].','Kavita salía al <b>alba</b>. → Kavita salía al [amanecer].','El silencio era <b>apacible</b>. → El silencio era [tranquilo].'],
+      extra:['estropea','iguales','anochecer']},
+    {type:'type', title:'Escribe el sinónimo', help:'Escribe un sinónimo. Te damos la primera letra como pista.', cls:'list',
+      lines:['rápido → {veloz@v....}','bonito → {hermoso|precioso|lindo@h... / p...}','corto → {breve@b....}','perder → {extraviar@e........}','contento → {alegre|feliz@a.... / f....}','extraño → {raro@r...}']},
+    {type:'open', title:'Piensa sinónimos', help:'Escribe un sinónimo de cada palabra. Tu maestra lo corregirá.',
+      prompts:[{q:'empezar →'},{q:'cara →'},{q:'mirar →'},{q:'listo →'},{q:'Copia cambiando la palabra destacada por un sinónimo: «Hoy te noto ALEGRE».', lines:2}]}
+  ]
+},
+{
+  id:'ant', title:'Antónimos', emoji:'☀️', color:'#fb8500', bg:'#ffe2c2',
+  recuerda:[
+    {e:'☀️🌙', t:'Palabras antónimas', d:'Son las que tienen <b>significados contrarios</b>.', x:'contenta y triste'},
+    {e:'↔️', t:'Más ejemplos', d:'llena – vacía · viejo – nuevo · ancho – estrecho · subir – bajar', x:''},
+    {e:'🤔', t:'¡No te líes!', d:'<b>Sinónimos</b> = significan <b>casi lo mismo</b>.<br><b>Antónimos</b> = significan <b>lo contrario</b>.', x:''}
+  ],
+  ex:[
+    {type:'match', title:'Forma parejas de antónimos', help:'Arrastra a cada palabra su antónimo y pulsa <b>Corregir</b>.',
+      pairs:[['llena','vacía'],['viejo','nuevo'],['aburrido','divertido'],['ancho','estrecho'],['abrir','cerrar'],['subir','bajar'],['meter','sacar'],['comprar','vender']]},
+    {type:'sort', title:'¿Sinónimos o antónimos?', help:'Arrastra cada pareja a su caja.',
+      buckets:[{id:'s',label:'👯 Sinónimos',bc:'#d9f6e6'},{id:'a',label:'☀️🌙 Antónimos',bc:'#ffe2c2'}],
+      items:[['alegre – contento','s'],['corto – breve','s'],['perder – extraviar','s'],['rojo – colorado','s'],['frío – caliente','a'],['grande – pequeño','a'],['secar – mojar','a'],['día – noche','a'],['rápido – veloz','s'],['encender – apagar','a']]},
+    {type:'type', title:'Escribe el antónimo', help:'Escribe el contrario. Te damos la primera letra como pista.', cls:'list',
+      lines:['día → {noche@n....}','arriba → {abajo@a....}','dentro → {fuera@f....}','rápido → {lento@l....}','encender → {apagar@a.....}','ganar → {perder@p.....}','secar → {mojar@m....}','quitar → {poner@p....}']},
+    {type:'open', title:'Piensa antónimos', help:'Copia las oraciones cambiando las palabras destacadas por sus antónimos. Tu maestra lo corregirá.',
+      prompts:[{q:'Esta sopa está muy SOSA y FRÍA.', lines:2},{q:'Vive en una casa MODERNA y muy LUMINOSA.', lines:2},{q:'Mi bicicleta es PEQUEÑA, pero RÁPIDA.', lines:2}]}
+  ]
+},
+{
+  id:'lec', title:'Comprensión lectora', emoji:'📖', color:'#e63950', bg:'#ffe0e5',
+  recuerda:[
+    {e:'👀', t:'Lee con calma', d:'Lee el texto <b>dos veces</b>: la primera para saber de qué trata y la segunda fijándote en los detalles.', x:''},
+    {e:'❓', t:'Las preguntas', d:'Fíjate en <b>quién</b>, <b>qué</b>, <b>dónde</b>, <b>cuándo</b> y <b>por qué</b>. Busca la respuesta en el texto.', x:''},
+    {e:'📚', t:'Palabras difíciles', d:'Si no entiendes una palabra, lee lo que hay alrededor o búscala en el vocabulario.', x:''}
+  ],
+  ex:[
+    {type:'choice', title:'Un gorro colorado', help:'Lee el cuento y elige la respuesta correcta. Después pulsa <b>Corregir</b>.', reading:READ_GORRO,
+      questions:[
+        {q:'¿Qué encontró el gnomo Fortunato?', o:['Un gorro colorado','Una seta roja','Un tejado'], a:0},
+        {q:'¿Por qué se puso el gorro viejo encima del nuevo?', o:['Porque tenía miedo de que se manchara','Porque hacía mucho frío','Porque el gorro nuevo era feo'], a:0},
+        {q:'¿Cómo estaba Jacinto cuando se encontraron?', o:['Triste, porque había perdido su gorro','Muy contento','Enfadado con Fortunato'], a:0},
+        {q:'¿De quién era el gorro colorado?', o:['De Jacinto','De Fortunato','De un caracol'], a:0},
+        {q:'¿Qué significa «extraviado»?', o:['Perdido','Roto','Nuevo'], a:0},
+        {q:'¿Cómo termina el cuento?', o:['Fortunato devuelve el gorro y los dos están felices','Fortunato se queda el gorro','Jacinto se enfada mucho'], a:0}
+      ]},
+    {type:'order', title:'Ordena el cuento', help:'Arrastra las frases para ponerlas en el orden en que ocurren en <i>Un gorro colorado</i>.', reading:READ_GORRO, collapsed:true,
+      items:['Fortunato se encuentra un gorro y se lo pone.','Fortunato se pone su gorro viejo encima del gorro rojo.','Fortunato se encuentra con Jacinto.','Jacinto le cuenta que ha perdido su gorro.','Fortunato le devuelve a Jacinto su gorro.']},
+    {type:'choice', title:'Todo es valioso', help:'Lee el cuento y elige la respuesta correcta.', reading:READ_KAVITA,
+      questions:[
+        {q:'¿Dónde vivía Kavita?', o:['En una pequeña aldea de la India','En una gran ciudad','Al lado del mar'], a:0},
+        {q:'¿Qué le pasaba a uno de los cántaros?', o:['Tenía una grieta y perdía agua','Era demasiado pesado','Estaba nuevo'], a:0},
+        {q:'¿Qué le aconsejó Ravi?', o:['Tirar la vasija y cambiarla por otra','Arreglar el cántaro','Ir al río más cerca'], a:0},
+        {q:'¿Qué había crecido junto al camino?', o:['Flores','Árboles frutales','Hierbas secas'], a:0},
+        {q:'¿Qué palabra es sinónimo de «arroyo»?', o:['Riachuelo','Cascada','Charco'], a:0},
+        {q:'¿Qué aprendió Ravi?', o:['Que lo que parece defectuoso puede tener mucho valor','Que hay que tirar las cosas rotas','Que las flores no necesitan agua'], a:0}
+      ]},
+    {type:'choice', title:'Lectura nueva: El huerto del colegio', help:'Lee este texto nuevo con atención, como en el examen.', reading:READ_HUERTO,
+      questions:[
+        {q:'¿Qué día bajan los alumnos al huerto?', o:['El jueves','El lunes','El viernes'], a:0},
+        {q:'¿Cómo se llama el maestro?', o:['Enrique','Miguel','Queso'], a:0},
+        {q:'¿Qué hace Marta en el huerto?', o:['Riega las lechugas','Quita las hojas secas','Planta zanahorias'], a:0},
+        {q:'¿Quién había hecho el agujero?', o:['Un conejo gris','Miguel','Un perro'], a:0},
+        {q:'¿Por qué llaman Queso al conejo?', o:['Porque tiene una mancha amarilla en la oreja','Porque come mucho queso','Porque es blanco'], a:0},
+        {q:'¿Qué hicieron los niños con el conejo?', o:['Le hicieron una casita y plantaron zanahorias para él','Lo echaron del huerto','Se lo llevaron a casa'], a:0}
+      ]},
+    {type:'sort', title:'Busca en el texto: K y G suave', help:'Estas palabras salen en <i>El huerto del colegio</i>. ¿Tienen sonido K o sonido G suave?', reading:READ_HUERTO, collapsed:true,
+      buckets:[{id:'k',label:'Sonido K 🧀',bc:'#dbe8ff'},{id:'g',label:'Sonido G suave 🐧',bc:'#d4f5f1'}],
+      items:[['Enrique','k'],['quita','k'],['conejo','k'],['casita','k'],['Queso','k'],['cuidar','k'],['Miguel','g'],['amigo','g'],['regadera','g'],['lechugas','g'],['agujero','g']]},
+    {type:'open', title:'Opina y escribe', help:'Responde con tus palabras. Tu maestra lo corregirá.',
+      prompts:[{q:'En «Un gorro colorado»: ¿crees que a Fortunato le importa más su amigo que el gorro? ¿Por qué?', lines:3},{q:'Escribe con tus palabras la enseñanza de «Todo es valioso».', lines:3},{q:'¿Qué nombre le pondrías tú al conejo del huerto? ¿Por qué?', lines:2}]}
+  ]
+},
+{
+  id:'poe', title:'El poema', emoji:'✒️', color:'#8f5cf7', bg:'#ece2ff',
+  recuerda:[
+    {e:'💜', t:'¿Qué es un poema?', d:'Es un texto en el que el autor <b>expresa sus emociones, sentimientos o pensamientos</b>. Se escribe <b>en verso</b>.', x:''},
+    {e:'📏', t:'El verso', d:'Cada <b>línea</b> de un poema es un <b>verso</b>.', x:''},
+    {e:'🧱', t:'La estrofa', d:'Un <b>conjunto de versos</b> es una <b>estrofa</b>. Entre una estrofa y otra hay un espacio.', x:''},
+    {e:'🎵', t:'La rima', d:'Los versos <b>riman</b> entre sí cuando <b>terminan en palabras que suenan igual</b>.', x:'Sim<b>ón</b> – dormil<b>ón</b> · lu<b>na</b> – ningu<b>na</b>'}
+  ],
+  ex:[
+    {type:'dragblanks', title:'¿Qué sabes del poema?', help:'Arrastra cada palabra a su hueco. ¡Sobran dos!',
+      text:['Un poema es un texto en el que el autor expresa sus [emociones], sentimientos o pensamientos.','Los poemas se escriben en [verso].','Cada línea de un poema es un [verso].','Un conjunto de versos es una [estrofa].','Los versos [riman] cuando terminan en palabras que suenan igual.'],
+      extra:['párrafo','dibujos']},
+    {type:'poem', title:'Analiza el poema', help:'Lee el poema y contesta. Después une cada palabra con la que rima.',
+      poemTitle:'El gato Simón', stanzas:[
+        ['En el tejado vive Simón,','un gato gris y dormilón.','Por las mañanas sale a pasear','y en cada esquina se para a jugar.'],
+        ['Por la noche mira la luna,','redonda y blanca como ninguna.','Después se duerme en su cojín','soñando con flores del jardín.']],
+      rhymes:[['Simón','dormilón'],['pasear','jugar'],['luna','ninguna'],['cojín','jardín']]},
+    {type:'poem', title:'Analiza otro poema', help:'Cuenta bien: ¡este poema tiene más estrofas!',
+      poemTitle:'La lluvia', stanzas:[
+        ['Cae la lluvia sin parar','y los niños salen a saltar.'],
+        ['Las gotas cantan en el cristal','una canción muy especial.'],
+        ['Y cuando el sol vuelve a salir,','todas las flores se ponen a reír.']],
+      rhymes:[['parar','saltar'],['cristal','especial'],['salir','reír']]},
+    {type:'open', title:'Escribe tu poema', help:'Escribe un poema de <b>dos versos</b> que <b>rimen</b>. Tu maestra lo leerá.',
+      note:'💡 Ejemplo: <i>Mi perrito se llama Tomás, / corre y salta y nunca va detrás.</i><br>Piensa primero en dos palabras que suenen igual al final: <b>sol – caracol</b>, <b>mar – jugar</b>, <b>luna – cuna</b>...',
+      prompts:[{q:'Título de tu poema:'},{q:'Verso 1:'},{q:'Verso 2:'},{q:'¿Qué palabras riman en tu poema?'}]}
+  ]
+}
+];
+
+/* ================= utilidades ================= */
+const $=s=>document.querySelector(s);
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const norm=s=>String(s).normalize('NFC').trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!¡?¿,]+$/,'');
+const KEY='lengua3-u12';
+const store={get(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return{}}},set(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}};
+let P=store.get(); P.best=P.best||{}; P.open=P.open||{}; if(P.sound===undefined)P.sound=true;
+const save=()=>store.set(P);
+
+/* ================= sonido ================= */
+const Sound={ctx:null,play(n,type='sine',vol=.18){if(!P.sound)return;try{this.ctx=this.ctx||new(window.AudioContext||window.webkitAudioContext)();const t0=this.ctx.currentTime;
+  n.forEach(([f,s,d])=>{const o=this.ctx.createOscillator(),g=this.ctx.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(0,t0+s);g.gain.linearRampToValueAtTime(vol,t0+s+.02);
+  g.gain.exponentialRampToValueAtTime(.001,t0+s+d);o.connect(g).connect(this.ctx.destination);o.start(t0+s);o.stop(t0+s+d+.05);});}catch(e){}},
+  pick(){this.play([[520,0,.06]],'sine',.08)},drop(){this.play([[440,0,.06],[560,.04,.08]],'triangle',.1)},
+  good(){this.play([[523,0,.15],[659,.13,.15],[784,.26,.15],[1047,.39,.4]],'triangle',.2)},
+  mid(){this.play([[523,0,.15],[587,.14,.25]],'triangle',.15)},bad(){this.play([[300,0,.15],[220,.14,.3]],'square',.07)}};
+function updSnd(){document.querySelectorAll('.sndbtn').forEach(b=>b.textContent=P.sound?'🔊':'🔇')}
+document.querySelectorAll('.sndbtn').forEach(b=>b.onclick=()=>{P.sound=!P.sound;save();updSnd();Sound.pick();});
+
+/* ================= mascota Leo (original) ================= */
+function mascot(){return `<svg class="mascot" viewBox="0 0 140 140" aria-hidden="true">
+  <ellipse cx="70" cy="132" rx="40" ry="6" fill="rgba(0,0,0,.12)"/>
+  <path d="M22 34 Q70 22 118 34 L118 118 Q70 106 22 118Z" fill="#e63950" stroke="#2b2d42" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M30 40 Q70 30 110 40 L110 110 Q70 100 30 110Z" fill="#fff" stroke="#2b2d42" stroke-width="3"/>
+  <line x1="70" y1="33" x2="70" y2="104" stroke="#2b2d42" stroke-width="3"/>
+  <g class="eye"><ellipse cx="50" cy="64" rx="9" ry="12" fill="#fff" stroke="#2b2d42" stroke-width="4"/><circle cx="52" cy="67" r="5" fill="#2b2d42"/><circle cx="54" cy="63" r="2" fill="#fff"/></g>
+  <g class="eye"><ellipse cx="90" cy="64" rx="9" ry="12" fill="#fff" stroke="#2b2d42" stroke-width="4"/><circle cx="92" cy="67" r="5" fill="#2b2d42"/><circle cx="94" cy="63" r="2" fill="#fff"/></g>
+  <ellipse cx="42" cy="84" rx="7" ry="4" fill="#ff8fab" opacity=".8"/><ellipse cx="98" cy="84" rx="7" ry="4" fill="#ff8fab" opacity=".8"/>
+  <path d="M58 84 Q70 96 82 84" fill="#2b2d42" stroke="#2b2d42" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 80 Q6 74 8 58" fill="none" stroke="#2b2d42" stroke-width="5" stroke-linecap="round"/>
+  <path d="M118 80 Q134 72 130 56" fill="none" stroke="#2b2d42" stroke-width="5" stroke-linecap="round"/>
+  <path d="M60 22 L64 8 L70 20 L76 8 L80 22" fill="#ffc23d" stroke="#2b2d42" stroke-width="3" stroke-linejoin="round"/>
+</svg>`}
+$('#heroMascot').innerHTML=mascot(); $('#buddyMascot').innerHTML=mascot();
+let sayT; function say(t,mood){const s=$('#buddySay');s.innerHTML=t;s.classList.add('show');const m=$('#buddyMascot .mascot');m.classList.remove('jump','sad');void m.offsetWidth;if(mood)m.classList.add(mood);
+  clearTimeout(sayT);sayT=setTimeout(()=>s.classList.remove('show'),2600);}
+
+/* ================= confeti ================= */
+const cv=$('#confetti'),cx=cv.getContext('2d');let parts=[],run=false;
+function confetti(n=120){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  const cols=['#e63950','#ffb703','#3a86ff','#2fbf71','#8f5cf7','#fb8500','#06b6a4'];
+  for(let i=0;i<n;i++)parts.push({x:innerWidth/2+(Math.random()-.5)*240,y:innerHeight*.5,vx:(Math.random()-.5)*16,vy:-Math.random()*16-6,r:Math.random()*6+4,c:pick(cols),rot:Math.random()*6,vr:(Math.random()-.5)*.3,life:0});
+  if(!run){run=true;requestAnimationFrame(tick);}}
+function tick(){cx.clearRect(0,0,innerWidth,innerHeight);parts.forEach(p=>{p.vy+=.45;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life++;cx.save();cx.translate(p.x,p.y);cx.rotate(p.rot);cx.fillStyle=p.c;cx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);cx.restore();});
+  parts=parts.filter(p=>p.y<innerHeight+40&&p.life<260);if(parts.length)requestAnimationFrame(tick);else{run=false;cx.clearRect(0,0,innerWidth,innerHeight);}}
+(()=>{const b=$('#bubbles');const em=['A','b','✏️','📚','?','!','ñ','Q','G','K','¿'];for(let i=0;i<14;i++){const s=el('span',null,pick(em));
+  Object.assign(s.style,{left:Math.random()*100+'%',animationDuration:(16+Math.random()*16)+'s',animationDelay:(-Math.random()*20)+'s',color:pick(['#e63950','#3a86ff','#8f5cf7','#fb8500','#06b6a4'])});b.appendChild(s);}})();
+
+/* ================= mapa ================= */
+const exId=(s,i)=>s.id+'-'+i;
+const isAuto=e=>e.type!=='open';
+function secStars(s){
+  const autos=s.ex.map((e,i)=>[e,i]).filter(([e])=>isAuto(e));
+  const avg=autos.reduce((a,[e,i])=>a+(P.best[exId(s,i)]||0),0)/autos.length;
+  return avg>=.9?3:avg>=.7?2:avg>=.4?1:0;
+}
+function secDone(s){return s.ex.every((e,i)=>isAuto(e)?P.best[exId(s,i)]!=null:openFilled(s,i));}
+function openFilled(s,i){return s.ex[i].prompts.every((_,k)=>(P.open[exId(s,i)+'-'+k]||'').trim());}
+const starStr=n=>[0,1,2].map(i=>`<span class="${i<n?'on':''}">★</span>`).join('');
+function renderMap(){
+  const w=$('#missions');w.innerHTML='';let tot=0,done=0;
+  SECTIONS.forEach((s,i)=>{const st=secStars(s);tot+=st;const d=secDone(s);if(d)done++;
+    const b=el('button','mission-btn');b.style.animationDelay=(i*.07)+'s';
+    b.innerHTML=`<div class="disc" style="--col:${s.color};--d:${i*.4}s"><span class="num">${i+1}</span>${s.emoji}${d?'<span class="done-mark">✔</span>':''}</div><div class="name">${s.title}</div><div class="stars">${starStr(st)}</div>`;
+    b.onclick=()=>{Sound.pick();openSec(i);};w.appendChild(b);});
+  $('#totalStars').textContent=tot;$('#maxStars').textContent=SECTIONS.length*3;
+  $('#heroSpeech').innerHTML=done===0?'¡Hola! Soy <b>Leo</b> 📖. Elige un tema, haz los ejercicios y pulsa <b>Corregir</b> al final. Si fallas algo, ¡repítelo para mejorar!'
+    :done<SECTIONS.length?`¡Ya has terminado <b>${done} de ${SECTIONS.length}</b> temas! Sigue así 💪`:'¡Has terminado todos los temas! 🎉 Repite los que tengan menos estrellas y enseña <b>tus respuestas</b> a la profe.';
+}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const s=$(id);void s.offsetWidth;s.classList.add('active');scrollTo({top:0});
+  $('#buddy').style.display=id==='#screen-sec'?'flex':'none';}
+$('#backBtn').onclick=$('#backBtn2').onclick=()=>{Sound.pick();renderMap();show('#screen-map');};
+$('#resetBtn').onclick=()=>{if(confirm('¿Seguro que quieres borrar todo tu progreso y tus respuestas?')){P.best={};P.open={};save();renderMap();}};
+$('#reportBtn').onclick=()=>{Sound.pick();renderReport();show('#screen-report');};
+
+/* ================= sección ================= */
+let S=null,step=0;
+function openSec(i){S=SECTIONS[i];step=0;document.documentElement.style.setProperty('--mc',S.color);document.documentElement.style.setProperty('--bg2',S.bg);
+  $('#sEmoji').textContent=S.emoji;$('#sTitle').textContent=S.title;show('#screen-sec');renderStep();setTimeout(()=>say('¡Vamos allá! 🚀','jump'),400);}
+function renderTabs(){
+  const t=$('#tabs');t.innerHTML='';
+  const mk=(label,i,mark)=>{const b=el('button','tab'+(i===step?' cur':''),label+(mark?`<span class="mk">${mark}</span>`:''));b.onclick=()=>{step=i;Sound.pick();renderStep();};t.appendChild(b);};
+  mk('📚 Recuerda',0);
+  S.ex.forEach((e,i)=>{let m='';if(isAuto(e)){const b=P.best[exId(S,i)];if(b!=null)m=b>=1?'⭐':b>=.7?'🙂':'🔁';}else if(openFilled(S,i))m='✏️';
+    mk(e.type==='open'?`✍️ ${i+1}`:String(i+1),i+1,m);});
+}
+function renderStep(){
+  renderTabs();const st=$('#stage');st.innerHTML='';const box=el('div','enter');st.appendChild(box);
+  if(step===0)renderRecuerda(box);else renderExercise(box,S.ex[step-1],exId(S,step-1));
+  const nav=el('div','nav');
+  const pv=el('button','btn alt','⬅ Anterior');pv.disabled=step===0;pv.onclick=()=>{step--;renderStep();scrollTo({top:0,behavior:'smooth'});};
+  const last=step===S.ex.length;const nx=el('button','btn',last?'🗺️ Volver a los temas':'Siguiente ➜');
+  nx.onclick=()=>{if(last){renderMap();show('#screen-map');}else{step++;renderStep();scrollTo({top:0,behavior:'smooth'});}};
+  nav.append(pv,nx);st.appendChild(nav);
+}
+function renderRecuerda(box){
+  box.appendChild(el('h2','act-h','<span class="tag">Recuerda</span> Repasamos la teoría'));
+  const g=el('div','rgrid');S.recuerda.forEach((c,i)=>{const d=el('div','rcard',`<div class="e">${c.e}</div><h3>${c.t}</h3><div>${c.d}</div>${c.x?`<div class="ex">${c.x}</div>`:''}`);d.style.animationDelay=(i*.1)+'s';g.appendChild(d);});
+  box.appendChild(g);
+}
+
+/* ================= ejercicios ================= */
+function renderExercise(box,ex,id){
+  const n=S.ex.indexOf(ex)+1;
+  box.appendChild(el('h2','act-h',`<span class="tag ${ex.type==='open'?'open':''}">${ex.type==='open'?'✍️ Para la profe':'Ejercicio '+n}</span> ${ex.title}`));
+  if(ex.help)box.appendChild(el('p','help','👉 '+ex.help));
+  if(ex.reading){const r=el('div','reading');r.innerHTML=ex.collapsed?`<details><summary>📖 Ver el texto otra vez</summary>${ex.reading}</details>`:ex.reading;box.appendChild(r);}
+  const area=el('div','ex');box.appendChild(area);
+  BUILD[ex.type](area,ex,id);
+  if(isAuto(ex))addCheckBar(box,area,ex,id);
+}
+function makeChip(t,v){const c=el('button','chip',t);c.type='button';c.dataset.val=norm(v);return c;}
+function makePool(chips){const p=el('div','pool');shuffle(chips).forEach(c=>p.appendChild(c));return p;}
+const BUILD={
+  sort(a,ex){
+    a.appendChild(makePool(ex.items.map(([t,b])=>{const c=makeChip(t,b);c.dataset.req='1';return c;})));
+    const bs=el('div','buckets');ex.buckets.forEach(b=>{const z=el('div','bucket zone',`<div class="bh">${b.label}</div><div class="zone-items"></div>`);z.dataset.accept=b.id;z.style.setProperty('--bc',b.bc);z.tabIndex=0;bs.appendChild(z);});
+    a.appendChild(bs);
+  },
+  dragblanks(a,ex){
+    const words=[];const L=el('div','lines '+(ex.cls||''));
+    ex.text.forEach(line=>{L.appendChild(el('p',null,line.replace(/\[([^\]]+)\]/g,(_,w)=>{words.push(w);return `<span class="gap zone" data-cap="1" data-accept="${w}" tabindex="0" style="--w:${Math.max(90,w.length*12+34)}px"></span>`;})));});
+    a.appendChild(makePool(words.map(w=>makeChip(w,w)).concat((ex.extra||[]).map(w=>makeChip(w,'✗'+w)))));a.appendChild(L);
+  },
+  match(a,ex){
+    a.appendChild(makePool(ex.pairs.map(([l,r])=>makeChip(r,r)).concat((ex.extra||[]).map(w=>makeChip(w,'✗'+w)))));
+    const g=el('div','pairs');shuffle(ex.pairs).forEach(([l,r])=>{const p=el('div','pair',`<span class="w">${l}</span><span class="arrow">➜</span>`);
+      const s=el('div','slot zone');s.dataset.accept=r;s.dataset.cap='1';s.tabIndex=0;p.appendChild(s);g.appendChild(p);});a.appendChild(g);
+  },
+  order(a,ex){
+    a.appendChild(makePool(ex.items.map((t,i)=>makeChip(t,String(i)))));
+    const o=el('div','olist');ex.items.forEach((_,i)=>{const r=el('div','orow',`<span class="n">${i+1}</span>`);const s=el('div','slot zone');s.dataset.accept=String(i);s.dataset.cap='1';s.tabIndex=0;r.appendChild(s);o.appendChild(r);});
+    a.appendChild(o);
+  },
+  type(a,ex){
+    const L=el('div','lines '+(ex.cls||''));
+    ex.lines.forEach(line=>{L.appendChild(el('p',null,line.replace(/\{([^}]+)\}/g,(_,spec)=>{const[ans,ph]=spec.split('@');const longest=Math.max(...ans.split('|').map(s=>s.length));
+      const w=ph?Math.max(longest,ph.length)*14+30:Math.max(54,longest*20+30);
+      return `<input class="tin" data-answers="${ans}" autocomplete="off" autocapitalize="off" spellcheck="false" ${ph?`placeholder="${ph}"`:''} style="--w:${w}px">`;})));});
+    a.appendChild(L);
+    a.querySelectorAll('.tin').forEach((inp,k,all)=>inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();(all[k+1]||inp).focus();}}));
+  },
+  choice(a,ex){
+    ex.questions.forEach((q,qi)=>{const d=el('div','q',`<p>${qi+1}. ${q.q}</p>`);const os=el('div','opts');const idx=shuffle(q.o.map((_,i)=>i));
+      d.dataset.choice='1';d.dataset.answer=String(idx.indexOf(q.a));
+      idx.forEach((oi,k)=>{const b=el('button','opt',`<span class="l">${'abc'[k]}</span><span>${q.o[oi]}</span>`);b.dataset.k=k;
+        b.onclick=()=>{if(b.disabled)return;os.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');d.dataset.sel=k;Sound.pick();};os.appendChild(b);});
+      d.appendChild(os);a.appendChild(d);});
+  },
+  poem(a,ex){
+    const total=ex.stanzas.reduce((s,x)=>s+x.length,0);
+    a.appendChild(el('div','poem',`<h3>${ex.poemTitle}</h3>`+ex.stanzas.map(st=>`<div class="st">${st.join('<br>')}</div>`).join('')));
+    a.appendChild(el('div','pq',`📏 ¿Cuántos <b>versos</b> tiene el poema? <input class="tin" inputmode="numeric" data-answers="${total}" autocomplete="off">`));
+    a.appendChild(el('div','pq',`🧱 ¿Cuántas <b>estrofas</b> tiene? <input class="tin" inputmode="numeric" data-answers="${ex.stanzas.length}" autocomplete="off">`));
+    a.appendChild(el('h4','sub','🎵 ¿Qué palabras riman? Arrastra a cada palabra la que rima con ella:'));
+    a.appendChild(makePool(ex.rhymes.map(([l,r])=>makeChip(r,r))));
+    const g=el('div','pairs');ex.rhymes.forEach(([l,r])=>{const p=el('div','pair',`<span class="w">${l}</span><span class="arrow">🎵</span>`);const s=el('div','slot zone');s.dataset.accept=r;s.dataset.cap='1';s.tabIndex=0;p.appendChild(s);g.appendChild(p);});
+    a.appendChild(g);
+  },
+  open(a,ex,id){
+    if(ex.note)a.appendChild(el('div','note',ex.note));
+    ex.prompts.forEach((p,k)=>{const key=id+'-'+k;const d=el('div','open-q');d.appendChild(el('label',null,p.q));
+      const f=(p.lines||1)>1?el('textarea'):el('input');if(f.tagName==='TEXTAREA')f.rows=p.lines;f.placeholder=p.ph||'Escribe aquí...';f.value=P.open[key]||'';
+      const sv=el('span','saved','✔ Guardado');let t;f.addEventListener('input',()=>{P.open[key]=f.value;save();clearTimeout(t);t=setTimeout(()=>{sv.classList.add('show');setTimeout(()=>sv.classList.remove('show'),1200);renderTabs();},500);});
+      d.append(f,sv);a.appendChild(d);});
+    a.appendChild(el('p','help','📝 Tus respuestas se guardan solas en este dispositivo. Al acabar, ve a <b>«Mis respuestas para la profe»</b> en la pantalla de temas.'));
+  }
+};
+
+/* ---------- corregir / repetir ---------- */
+function addCheckBar(box,area,ex,id){
+  const bar=el('div','checkbar');const msg=el('span','msg',P.best[id]!=null?`Tu mejor nota: ${Math.round(P.best[id]*10)} / 10`:'Cuando termines, pulsa Corregir.');
+  const b=el('button','btn check','✔ Corregir');bar.append(msg,b);box.appendChild(bar);
+  b.onclick=()=>{
+    const r=check(area);if(r.missing&&!confirm(`Te faltan ${r.missing} por responder. ¿Quieres corregir igualmente?`))return;
+    lock(area);const ratio=r.ok/r.total;P.best[id]=Math.max(P.best[id]||0,ratio);save();renderTabs();
+    bar.className='checkbar '+(ratio===1?'good':'mid');
+    msg.innerHTML=`<span class="score">${r.ok}/${r.total}</span>`+(ratio===1?'¡Perfecto! Todo correcto 🎉':ratio>=.7?'¡Muy bien! Mira lo que está en rojo y repítelo para sacar un 10.':'Fíjate en los errores en rojo y vuelve a intentarlo. ¡Tú puedes!');
+    if(ratio===1){Sound.good();confetti(140);say(pick(['¡Fantástico! ⭐','¡Lo has bordado!','¡Eres un crack! 🎉']),'jump');}
+    else if(ratio>=.7){Sound.mid();say('¡Casi! Repítelo para mejorar 💪','jump');}else{Sound.bad();say('No pasa nada. ¡Repite el ejercicio! 🙂','sad');}
+    b.className='btn again';b.textContent='🔁 Repetir ejercicio';
+    b.onclick=()=>{Sound.pick();renderStep();};
+  };
+}
+function check(area){
+  let ok=0,total=0,missing=0;
+  area.querySelectorAll('.tin[data-answers]').forEach(i=>{total++;const v=norm(i.value);if(!v)missing++;const good=i.dataset.answers.split('|').map(norm).includes(v);if(good)ok++;i.classList.add(good?'ok':'ko');});
+  area.querySelectorAll('.zone[data-cap="1"]').forEach(z=>{total++;const c=z.querySelector('.chip');if(!c){missing++;z.classList.add('ko');return;}
+    const good=norm(z.dataset.accept)===c.dataset.val;if(good)ok++;c.classList.add(good?'ok':'ko');});
+  area.querySelectorAll('.chip[data-req]').forEach(c=>{total++;const z=c.closest('.bucket');if(!z){missing++;c.classList.add('ko');return;}
+    const good=z.dataset.accept===c.dataset.val;if(good)ok++;c.classList.add(good?'ok':'ko');});
+  area.querySelectorAll('[data-choice]').forEach(q=>{total++;const sel=q.dataset.sel;if(sel==null){missing++;q.classList.add('miss');return;}
+    const btn=q.querySelector(`.opt[data-k="${sel}"]`);const good=sel===q.dataset.answer;if(good)ok++;btn.classList.add(good?'ok':'ko');});
+  return{ok,total,missing};
+}
+function lock(area){area.querySelectorAll('.chip').forEach(c=>{c.classList.add('locked');c.classList.remove('sel');});area.querySelectorAll('input,.opt').forEach(i=>i.disabled=true);
+  area.querySelectorAll('.pool .chip:not(.ko)').forEach(c=>c.style.opacity=.5);}
+
+/* ================= arrastrar (ratón + táctil) — colocación libre ================= */
+let D=null,selected=null,hoverT=null;
+const targetAt=(x,y)=>{const e=document.elementFromPoint(x,y);return e?(e.closest('#stage .zone')||e.closest('#stage .pool')):null;};
+function exOf(n){return n.closest('.ex');}
+function place(chip,target){
+  if(exOf(chip)!==exOf(target))return false;
+  if(target.classList.contains('pool')){target.appendChild(chip);}
+  else{if(target.dataset.cap==='1'){const old=target.querySelector('.chip');if(old&&old!==chip)exOf(target).querySelector('.pool').appendChild(old);target.classList.remove('ko');}
+    (target.querySelector('.zone-items')||target).appendChild(chip);}
+  chip.classList.remove('sel','src');Sound.drop();return true;
+}
+document.addEventListener('pointerdown',e=>{const c=e.target.closest('#stage .chip:not(.locked)');if(!c||(e.button!==undefined&&e.button!==0))return;D={chip:c,x0:e.clientX,y0:e.clientY,moved:false,id:e.pointerId};});
+document.addEventListener('pointermove',e=>{
+  if(!D||e.pointerId!==D.id)return;
+  if(!D.moved){if(Math.hypot(e.clientX-D.x0,e.clientY-D.y0)<7)return;D.moved=true;const r=D.chip.getBoundingClientRect();D.offX=D.x0-r.left;D.offY=D.y0-r.top;
+    const g=D.chip.cloneNode(true);g.classList.add('ghost');g.classList.remove('sel');g.style.width=r.width+'px';document.body.appendChild(g);D.ghost=g;D.chip.classList.add('src');
+    if(selected){selected.classList.remove('sel');selected=null;}Sound.pick();requestAnimationFrame(autoScroll);}
+  e.preventDefault();D.cx=e.clientX;D.cy=e.clientY;D.ghost.style.transform=`translate(${e.clientX-D.offX}px,${e.clientY-D.offY}px) rotate(-4deg) scale(1.06)`;hover();
+},{passive:false});
+function hover(){if(!D)return;const t=targetAt(D.cx,D.cy);if(t!==hoverT){hoverT?.classList.remove('hover');hoverT=t;t?.classList.add('hover');}}
+function autoScroll(){if(!D||!D.moved)return;const edge=Math.min(110,innerHeight*.18);let v=0;
+  if(D.cy>innerHeight-edge)v=Math.ceil((D.cy-(innerHeight-edge))/edge*18);else if(D.cy<edge)v=-Math.ceil((edge-D.cy)/edge*18);
+  if(v){scrollBy(0,v);hover();}requestAnimationFrame(autoScroll);}
+function endDrag(e,cancel){
+  if(!D||(e&&e.pointerId!==D.id))return;const d=D;D=null;hoverT?.classList.remove('hover');hoverT=null;
+  if(!d.moved){if(cancel)return;
+    if(selected&&selected!==d.chip){const z=d.chip.closest('.zone');if(z){const s=selected;selected=null;place(s,z);return;}}
+    if(selected===d.chip){d.chip.classList.remove('sel');selected=null;}else{selected?.classList.remove('sel');selected=d.chip;d.chip.classList.add('sel');Sound.pick();}return;}
+  const t=cancel?null:targetAt(e.clientX,e.clientY);
+  if(t&&place(d.chip,t)){d.ghost.remove();}
+  else{const r=d.chip.getBoundingClientRect();d.ghost.classList.add('back');d.ghost.style.transform=`translate(${r.left}px,${r.top}px)`;setTimeout(()=>{d.ghost.remove();d.chip.classList.remove('src');},300);}
+}
+document.addEventListener('pointerup',e=>endDrag(e,false));
+document.addEventListener('pointercancel',e=>endDrag(e,true));
+document.addEventListener('click',e=>{if(!selected)return;if(e.target.closest('.chip'))return;const t=e.target.closest('#stage .zone')||e.target.closest('#stage .pool');if(!t)return;
+  const c=selected;selected=null;if(!place(c,t))c.classList.remove('sel');});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const c=e.target.closest?.('#stage .chip:not(.locked)');
+  if(c){e.preventDefault();selected?.classList.remove('sel');selected=c;c.classList.add('sel');return;}
+  const z=e.target.closest?.('#stage .zone');if(z&&selected){e.preventDefault();const s=selected;selected=null;place(s,z);}});
+
+/* ================= informe para la profe ================= */
+function renderReport(){
+  const r=$('#report');r.innerHTML='';
+  r.appendChild(el('h2','act-h','<span class="tag open">📝</span> Mis respuestas para la profe'));
+  r.appendChild(el('p','help noprint','Escribe tu nombre y pulsa <b>Imprimir</b> (o «Guardar como PDF») para entregárselo a tu maestra.'));
+  const nm=el('div','rep-name','<span>Nombre:</span>');const ni=el('input');ni.value=P.name||'';ni.placeholder='Tu nombre y apellidos';ni.oninput=()=>{P.name=ni.value;save();};nm.appendChild(ni);r.appendChild(nm);
+  r.appendChild(el('p','rep-scores',`Fecha: ${new Date().toLocaleDateString('es-ES')}`));
+  SECTIONS.forEach(s=>{
+    const sec=el('div','rep-sec');const scores=s.ex.map((e,i)=>isAuto(e)?`Ej. ${i+1}: ${P.best[exId(s,i)]!=null?Math.round(P.best[exId(s,i)]*10)+'/10':'—'}`:null).filter(Boolean).join(' · ');
+    sec.appendChild(el('h3',null,`<span>${s.emoji} ${s.title}</span><span class="stars">${starStr(secStars(s))}</span>`));
+    sec.appendChild(el('div','rep-scores','Mejor nota en los ejercicios autocorregidos: '+scores));
+    s.ex.forEach((e,i)=>{if(e.type!=='open')return;sec.appendChild(el('h4',null,'✍️ '+e.title));
+      e.prompts.forEach((p,k)=>{const v=(P.open[exId(s,i)+'-'+k]||'').trim();const it=el('div','rep-item');it.appendChild(el('div','qq',p.q));
+        const aa=el('div','aa'+(v?'':' empty'));aa.textContent=v||'(sin responder)';it.appendChild(aa);sec.appendChild(it);});});
+    r.appendChild(sec);});
+  const row=el('div','nav noprint');const pr=el('button','btn','🖨️ Imprimir / Guardar PDF');pr.style.setProperty('--mc','#8f5cf7');pr.onclick=()=>window.print();
+  const back=el('button','btn alt','⬅ Volver a los temas');back.onclick=()=>{renderMap();show('#screen-map');};row.append(back,pr);r.appendChild(row);
+}
+
+updSnd();renderMap();
+</script>
+</body>
+</html>
